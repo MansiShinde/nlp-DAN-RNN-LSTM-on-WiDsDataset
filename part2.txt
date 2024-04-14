@@ -1,0 +1,57 @@
+## Advantages of LSTM over Vanilla RNN
+
+Long Short-Term Memory (LSTM) networks offer several key advantages over vanilla Recurrent Neural Networks (RNNs):
+
+1. **Handling Long-Term Dependencies**: LSTMs are designed to overcome the vanishing gradient problem that plagues vanilla RNNs, allowing them to learn long-term dependencies in sequential data more effectively. This is achieved through the use of gating mechanisms (input, output, and forget gates) that regulate the flow of information into and out of the cell state[1][2][3].
+
+2. **Selective Memory**: The forget gate in LSTMs allows the network to selectively "forget" or retain information from previous time steps, enabling it to capture long-range dependencies while avoiding the accumulation of irrelevant information[1][3].
+
+3. **Mitigating Exploding Gradients**: In addition to addressing the vanishing gradient problem, LSTMs are less susceptible to the exploding gradient issue, which can cause unstable training in vanilla RNNs[3].
+
+4. **Improved Performance**: Due to their ability to capture long-term dependencies and selectively retain relevant information, LSTMs often outperform vanilla RNNs on tasks involving sequential data, such as language modeling, machine translation, and speech recognition[1][2][4].
+
+## Word Embeddings and Word Sense Disambiguation
+
+Regarding the second question, if we train Word2Vec embeddings on a corpus containing all possible word senses for every word, the resulting embeddings alone would not be sufficient to identify different word senses. Here's why:
+
+Word embeddings like Word2Vec represent words as dense vectors in a continuous vector space, where semantically similar words are positioned closer together. However, these embeddings capture the overall context and meaning of a word, but they do not explicitly distinguish between different word senses[5].
+
+To identify different word senses using Word2Vec embeddings, additional information or techniques would be required, such as:
+
+1. **Sense-Aware Embeddings**: Training embeddings that are aware of word senses, either by incorporating sense annotations or leveraging unsupervised techniques like clustering or topic modeling to separate different senses[5].
+
+2. **Context-Dependent Embeddings**: Using techniques like ELMo or BERT that generate context-dependent embeddings, which can capture different word senses based on the surrounding context[5].
+
+3. **Sense Disambiguation Models**: Combining word embeddings with additional models or features specifically designed for Word Sense Disambiguation (WSD), such as topic models, knowledge bases, or supervised classifiers trained on sense-annotated data[5].
+
+In summary, while Word2Vec embeddings capture semantic similarities between words, they do not inherently distinguish between different word senses. Additional techniques or models would be required to leverage these embeddings for WSD tasks.
+
+## Word Sense Disambiguation as Textual Entailment
+
+To approach the Word Sense Disambiguation (WSD) problem as a textual entailment task, we can reformulate the problem as follows:
+
+1. **Premise**: The sentence or context in which the ambiguous word appears.
+2. **Hypothesis**: A statement describing a specific sense or meaning of the ambiguous word.
+
+For each ambiguous word in the premise, we can generate multiple hypotheses, each representing a different sense or meaning of the word. The goal would be to determine which hypothesis (sense) is entailed by the premise (context).
+
+Here's an example:
+
+**Premise**: The bank was crowded with people waiting in line.
+**Hypothesis 1**: The financial institution was crowded with people waiting in line. (Entailed)
+**Hypothesis 2**: The river bank was crowded with people waiting in line. (Not Entailed)
+
+In this case, the task would be to identify that Hypothesis 1 is entailed by the premise, while Hypothesis 2 is not entailed, indicating that the word "bank" in the premise refers to the financial institution sense.
+
+To generate the hypotheses, we could leverage existing sense inventories or knowledge bases, such as WordNet, which provide definitions and examples for different word senses. These definitions or examples could be used to construct the hypothesis statements.
+
+Once the premise and hypotheses are formulated, we can train a textual entailment model (e.g., using natural language inference datasets) to predict whether each hypothesis is entailed by the premise or not. The hypothesis with the highest entailment score would correspond to the most likely sense of the ambiguous word in the given context.
+
+It's important to note that this approach may require additional techniques or resources, such as sense-aware embeddings or knowledge bases, to effectively capture and represent the different word senses in the hypotheses.
+
+Citations:
+[1] https://www.linkedin.com/advice/0/how-do-you-choose-between-rnn-lstm-natural-language
+[2] https://www.shiksha.com/online-courses/articles/rnn-vs-gru-vs-lstm/
+[3] https://www.linkedin.com/advice/1/what-advantages-disadvantages-using-long-short-term
+[4] https://www.turing.com/kb/recurrent-neural-networks-and-lstm
+[5] https://ai.stackexchange.com/questions/18198/what-is-the-difference-between-lstm-and-rnn
